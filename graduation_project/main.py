@@ -7,6 +7,7 @@ os.chdir('E:/anaconda/envs/pytorch/graduation_project')
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--architecture', default='--FPN', type=str, help='train or eval')
     parser.add_argument('--mode', default='--mode', type=str, help='train or eval')
     parser.add_argument('--input', default="E:/anaconda/envs/pytorch/graduation_project/demo", type=str, help='输入')
     parser.add_argument('--epoch', default=1200, type=int, help='训练的总轮数')
@@ -15,9 +16,9 @@ def main():
     args = parser.parse_args()
 
     if args.mode == "--mode":
-        trainer(args.input, args.epoch, args.checkpoints, args.pretrained)
+        trainer(args.architecture, args.input, args.epoch, args.checkpoints, args.pretrained)
     elif args.mode == "--eval":
-        eval_mode(args.input, args.checkpoints)
+        eval_mode(args.architecture, args.input, args.checkpoints)
 
 
 if __name__ == '__main__':

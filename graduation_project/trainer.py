@@ -2,7 +2,7 @@ from train import *
 from timefun import *
 
 
-def trainer(local_input_path, local_epoch, local_checkpoints, local_pretrained):
+def trainer(architecture, local_input_path, local_epoch, local_checkpoints, local_pretrained):
     input_path = local_input_path
     epochs = local_epoch
     if local_checkpoints is not None:
@@ -16,7 +16,7 @@ def trainer(local_input_path, local_epoch, local_checkpoints, local_pretrained):
     else:
         current_epoch = 0
     runtime = 0
-    start_train = train(input_path, local_checkpoints, local_pretrained)
+    start_train = train(architecture, input_path, local_checkpoints, local_pretrained)
     for epoch in range(0, epochs - current_epoch):
         start_time = time.time()
         print("-----第{}轮训练开始-----".format(current_epoch + epoch + 1))

@@ -19,7 +19,7 @@ from graduation_project.Loss.loss import DBLoss
 
 
 class train:
-    def __init__(self, path, local_checkpoints, local_pretrained):
+    def __init__(self, architecture, path, local_checkpoints, local_pretrained):
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.local_ic15_data_path = path
         self.local_train_data_label_ = os.path.join(self.local_ic15_data_path, "train.txt")
@@ -27,7 +27,7 @@ class train:
         self.local_eval_dataloader = (MyDataloader(
             self.local_ic15_data_path, self.local_train_data_label_, self.local_eval_data_label_).
                                  eval_dataloader_fun(batch_size=4, num_workers=4))
-        self.mynet = MyNet().to(self.device)
+        self.mynet = MyNet(architecture).to(self.device)
         self.db_loss = DBLoss().to(self.device)
         self.loss = 0
         self.loss_eval = 0
